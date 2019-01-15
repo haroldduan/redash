@@ -19,8 +19,17 @@ services:
       REDASH_LOG_LEVEL: "INFO"
       REDASH_REDIS_URL: "redis://redis:6379/0"
       REDASH_DATABASE_URL: "postgresql://postgres@postgres/postgres"
-      REDASH_COOKIE_SECRET: veryverysecret
-      REDASH_WEB_WORKERS: 4
+      REDASH_COOKIE_SECRET: "Q422k6vaXUk8"
+      REDASH_WEB_WORKERS: 4      
+      # mail
+      REDASH_MAIL_SERVER: "smtp.qiye.aliyun.com"
+      REDASH_MAIL_PORT: 465
+      REDASH_MAIL_USE_TLS: "false"
+      REDASH_MAIL_USE_SSL: "true"
+      REDASH_MAIL_USERNAME: "avardd@avatech.com.cn"
+      REDASH_MAIL_PASSWORD: "fuckingWorld"
+      REDASH_MAIL_DEFAULT_SENDER: "harold.duan@avatech.com.cn"
+      REDASH_HOST: "http://192.168.3.14:5000"
     restart: always
   worker:
     image: redash/redash:latest
@@ -35,16 +44,22 @@ services:
     restart: always
   redis:
     image: redis:3.0-alpine
+    ports:
+    - "6379:6379"
+    volumes: 
+      - ./data/redis_data:/data
     restart: always
   postgres:
     image: postgres:9.5.6-alpine
-    # volumes:
-    #   - /opt/postgres-data:/var/lib/postgresql/data
+    ports:
+    - "5432:5432"
+    volumes:
+      - ./data/postgresql_data:/var/lib/postgresql/data
     restart: always
   nginx:
     image: redash/nginx:latest
     ports:
-      - "80:80"
+      - "88:80"
     depends_on:
       - server
     links:
