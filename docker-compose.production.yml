@@ -28,7 +28,7 @@ services:
       REDASH_MAIL_USE_SSL: "true"
       REDASH_MAIL_USERNAME: "avardd@avatech.com.cn"
       REDASH_MAIL_PASSWORD: "fuckingWorld"
-      REDASH_MAIL_DEFAULT_SENDER: "harold.duan@avatech.com.cn"
+      REDASH_MAIL_DEFAULT_SENDER: "avardd@avatech.com.cn"
       REDASH_HOST: "http://192.168.3.14:5000"
     restart: always
   worker:
